@@ -6,7 +6,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:layout_margin="5dp">
 
         <LinearLayout
@@ -17,22 +17,21 @@
             <ImageView
                 android:id="@+id/image_card"
                 android:layout_width="match_parent"
-                android:layout_height="190dp" />
+                android:layout_height="200dp" />
 
             <TextView
                 android:id="@+id/judul_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="JUDUL"
-
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/deskripsi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="deskripsi"/>
+                android:maxLength="30"/>
 
             <RatingBar
                 android:id="@+id/rating_bar"
@@ -40,6 +39,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:max="5"
+                android:stepSize="0.1"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
 

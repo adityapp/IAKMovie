@@ -1,7 +1,6 @@
 package com.example.axce.movie.rest;
 
-import com.example.axce.movie.model.ModelNew;
-import com.example.axce.movie.model.ModelPopular;
+import com.example.axce.movie.model.ModelMovie;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,9 +14,6 @@ public interface ApiClient {
     public static final String KEY = "abdf48fd44cb74007720836ffe506983";
 
     @GET
-    Call<ModelPopular> getPopular(@Url String url);
-
-    @GET
-    Call<ModelNew> getNew(@Url String url);
+    Call<ModelMovie> getMovie(@Url String url);
 
 }

@@ -17,13 +17,26 @@
             android:id="@+id/tab_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="new"/>
+            android:text="Now playing" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/tab_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="top"/>
+            android:text="top" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_upcoming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upcoming" />
+
+        <android.support.design.widget.TabItem
+            android:id="@+id/tab_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Popular" />
+
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager

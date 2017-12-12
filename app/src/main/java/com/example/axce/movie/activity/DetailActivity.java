@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView image;
-    private TextView judul;
+    private TextView judul, tanggal;
     private JustifiedTextView deskripsi;
     private RatingBar ratingBar;
 
@@ -30,6 +30,7 @@ public class DetailActivity extends AppCompatActivity {
         judul = findViewById(R.id.detail_judul);
         deskripsi = findViewById(R.id.detail_deskripsi);
         ratingBar = findViewById(R.id.detail_rating_bar);
+        tanggal = findViewById(R.id.detail_tanggal);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -42,6 +43,7 @@ public class DetailActivity extends AppCompatActivity {
                 .into(image);
         judul.setText(extra.getTitle());
         deskripsi.setText(extra.getOverview());
+        tanggal.setText(extra.getRelease_date());
         ratingBar.setRating(Float.valueOf(extra.getVote_average()) / 2);
     }
 

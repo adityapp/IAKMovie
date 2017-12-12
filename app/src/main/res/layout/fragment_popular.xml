@@ -1,16 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.axce.movie.fragment.TopFragment">
+    tools:context="com.example.axce.movie.fragment.PopularFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:padding="10dp"
-        android:text="Top Movie"
+        android:text="Popular Movie"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -19,13 +20,13 @@
         android:layout_height="wrap_content">
 
         <ProgressBar
-            android:id="@+id/loading_bar_top"
+            android:id="@+id/loading_bar_popular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_top"
+            android:id="@+id/recyclerview_popular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

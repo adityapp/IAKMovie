@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.axce.movie.adapter.NewRecyclerViewAdapter;
 import com.example.axce.movie.R;
@@ -27,12 +28,13 @@ public class NewFragment extends Fragment {
     private NewRecyclerViewAdapter recyclerViewAdapter;
     private Retrofit retrofit;
     private ArrayList<ModelMovie.ResultsBean> resultsBeans;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new, container, false);
         recyclerView = view.findViewById(R.id.recyclerview_new);
-
+        progressBar = view.findViewById(R.id.loading_bar_new);
         //retrofit
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/movie/")
@@ -75,6 +77,7 @@ public class NewFragment extends Fragment {
                     ));
                     Log.d("cekisi", resultsBeans.get(i).getTitle());
                 }
+                progressBar.setVisibility(View.GONE);
                 recyclerViewAdapter = new NewRecyclerViewAdapter(getContext());
                 recyclerViewAdapter.setList(resultsBeans);
                 recyclerView.setAdapter(recyclerViewAdapter);

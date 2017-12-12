@@ -57,6 +57,7 @@ public class NewRecyclerViewAdapter extends RecyclerView.Adapter<NewRecyclerView
                 context.startActivity(intent);
             }
         });
+        holder.tanggal.setText(dataset.get(position).getRelease_date());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class NewRecyclerViewAdapter extends RecyclerView.Adapter<NewRecyclerView
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
-        TextView judul, deskripsi;
+        TextView judul, deskripsi, tanggal;
         RatingBar ratingBar;
         CardView cardView;
 
@@ -81,6 +82,7 @@ public class NewRecyclerViewAdapter extends RecyclerView.Adapter<NewRecyclerView
             deskripsi = itemView.findViewById(R.id.deskripsi);
             ratingBar = itemView.findViewById(R.id.rating_bar);
             cardView = itemView.findViewById(R.id.card_view);
+            tanggal = itemView.findViewById(R.id.tanggal);
         }
     }
 

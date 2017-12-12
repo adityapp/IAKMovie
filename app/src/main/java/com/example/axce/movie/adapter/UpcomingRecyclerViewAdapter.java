@@ -2,9 +2,11 @@ package com.example.axce.movie.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Rating;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,40 +23,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by AXCE on 08/12/2017.
+ * Created by AXCE on 10/12/2017.
  */
 
-public class TopRecyclerViewAdapter extends RecyclerView.Adapter<TopRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<ModelMovie.ResultsBean> dataset;
+public class UpcomingRecyclerViewAdapter extends RecyclerView.Adapter<UpcomingRecyclerViewAdapter.ViewHolder>{
+    private ArrayList<ModelMovie.ResultsBean> dataSet;
     private Context context;
-    private ViewHolder card;
 
-    public TopRecyclerViewAdapter(Context context){
+    public UpcomingRecyclerViewAdapter(Context context){
         this.context = context;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
-        TopRecyclerViewAdapter.ViewHolder viewHolder = new TopRecyclerViewAdapter.ViewHolder(view);
-        card = viewHolder;
+    public UpcomingRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview,parent,false);
+        UpcomingRecyclerViewAdapter.ViewHolder viewHolder = new UpcomingRecyclerViewAdapter.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(TopRecyclerViewAdapter.ViewHolder holder, final int position) {
-        Log.d("CEKLIST", dataset.get(position).getTitle());
-        holder.judul.setText(dataset.get(position).getTitle());
-        holder.deskripsi.setText(dataset.get(position).getOverview());
-        holder.ratingBar.setRating(Float.valueOf(dataset.get(position).getVote_average())/2);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.judul.setText(dataSet.get(position).getTitle());
+        holder.deskripsi.setText(dataSet.get(position).getOverview());
+        holder.tanggal.setText(dataSet.get(position).getRelease_date());
+        holder.ratingBar.setRating(Float.valueOf(dataSet.get(position).getVote_average())/2);
         Glide.with(context)
-                .load("http://image.tmdb.org/t/p/w500"+dataset.get(position).getPoster_path())
+                .load("http://image.tmdb.org/t/p/w500"+dataSet.get(position).getPoster_path())
                 .into(holder.image);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("object",(Serializable) dataset.get(position));
+                intent.putExtra("object",(Serializable) dataSet.get(position));
                 context.startActivity(intent);
             }
         });
@@ -62,16 +62,13 @@ public class TopRecyclerViewAdapter extends RecyclerView.Adapter<TopRecyclerView
 
     @Override
     public int getItemCount() {
-        return dataset.size();
+        return dataSet.size();
     }
 
-    public void setList(ArrayList<ModelMovie.ResultsBean> dataset){
-        this.dataset = dataset;
-    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
-        TextView judul, deskripsi,tanggal;
+        TextView judul, deskripsi, tanggal;
         RatingBar ratingBar;
         CardView cardView;
 
@@ -80,9 +77,13 @@ public class TopRecyclerViewAdapter extends RecyclerView.Adapter<TopRecyclerView
             image = itemView.findViewById(R.id.image_card);
             judul = itemView.findViewById(R.id.judul_card);
             deskripsi = itemView.findViewById(R.id.deskripsi);
+            tanggal = itemView.findViewById(R.id.tanggal);
             ratingBar = itemView.findViewById(R.id.rating_bar);
             cardView = itemView.findViewById(R.id.card_view);
-            tanggal = itemView.findViewById(R.id.tanggal);
         }
+    }
+
+    public void setList(ArrayList<ModelMovie.ResultsBean> dataSet){
+        this.dataSet = dataSet;
     }
 }

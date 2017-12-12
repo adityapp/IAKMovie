@@ -5,7 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.axce.movie.fragment.NewFragment;
+import com.example.axce.movie.fragment.PopularFragment;
 import com.example.axce.movie.fragment.TopFragment;
+import com.example.axce.movie.fragment.UpcomingFragment;
 
 /**
  * Created by AXCE on 05/12/2017.
@@ -23,8 +25,14 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 NewFragment tab1 = new NewFragment();
                 return tab1;
             case 1:
-                TopFragment tab2 = new TopFragment();
+                UpcomingFragment tab2 = new UpcomingFragment();
                 return tab2;
+            case 2:
+                TopFragment tab3 = new TopFragment();
+                return tab3;
+            case 3:
+                PopularFragment tab4 = new PopularFragment();
+                return tab4;
             default:
                 return null;
         }
@@ -32,6 +40,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 4;
     }
 }

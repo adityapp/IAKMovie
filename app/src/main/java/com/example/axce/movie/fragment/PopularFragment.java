@@ -1,6 +1,9 @@
 package com.example.axce.movie.fragment;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.axce.movie.R;
-import com.example.axce.movie.adapter.TopRecyclerViewAdapter;
+import com.example.axce.movie.adapter.PopularRecyclerViewAdapter;
+import com.example.axce.movie.adapter.UpcomingRecyclerViewAdapter;
 import com.example.axce.movie.model.ModelMovie;
 import com.example.axce.movie.rest.ApiClient;
 
@@ -23,18 +27,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TopFragment extends Fragment {
+
+public class PopularFragment extends Fragment {
     private RecyclerView recyclerView;
-    private TopRecyclerViewAdapter recyclerViewAdapter;
+    private PopularRecyclerViewAdapter recyclerViewAdapter;
     private Retrofit retrofit;
-    ArrayList<ModelMovie.ResultsBean> resultsBeans;
-    private ProgressBar progressBar;
+    private ArrayList<ModelMovie.ResultsBean> resultsBeans;
+    private ProgressBar loading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_top, container, false);
-        recyclerView = view.findViewById(R.id.recyclerview_top);
-        progressBar = view.findViewById(R.id.loading_bar_top);
+        View view = inflater.inflate(R.layout.fragment_popular,container,false);
+        recyclerView = view.findViewById(R.id.recyclerview_popular);
+        loading = view.findViewById(R.id.loading_bar_popular);
 
         //retrofit
         retrofit = new Retrofit.Builder()
@@ -51,14 +56,13 @@ public class TopFragment extends Fragment {
 
     private void getList(){
         final ApiClient apiClient = retrofit.create(ApiClient.class);
-
-        Call<ModelMovie> call = apiClient.getMovie("top_rated?api_key=abdf48fd44cb74007720836ffe506983&language=en-US&page=1");
+        Call<ModelMovie> call = apiClient.getMovie("popular?api_key=abdf48fd44cb74007720836ffe506983&language=en-US&page=1");
         call.enqueue(new Callback<ModelMovie>() {
             @Override
             public void onResponse(Call<ModelMovie> call, Response<ModelMovie> response) {
                 ModelMovie modelMovie = response.body();
                 resultsBeans = new ArrayList<ModelMovie.ResultsBean>();
-                for (int i = 0; i < modelMovie.getResults().size(); i++) {
+                for (int i = 0; i < modelMovie.getResults().size(); i++){
                     resultsBeans.add(new ModelMovie.ResultsBean(
                             modelMovie.getResults().get(i).getVote_count(),
                             modelMovie.getResults().get(i).getId(),
@@ -75,17 +79,16 @@ public class TopFragment extends Fragment {
                             modelMovie.getResults().get(i).getRelease_date(),
                             modelMovie.getResults().get(i).getGenre_ids()
                     ));
-                    Log.d("cekisi", resultsBeans.get(i).getTitle());
                 }
-                progressBar.setVisibility(View.GONE);
-                recyclerViewAdapter = new TopRecyclerViewAdapter(getContext());
+                loading.setVisibility(View.GONE);
+                recyclerViewAdapter = new PopularRecyclerViewAdapter(getContext());
                 recyclerViewAdapter.setList(resultsBeans);
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
 
             @Override
             public void onFailure(Call<ModelMovie> call, Throwable t) {
-                Log.d("Error", t.getMessage());
+                Log.d("Error",t.getMessage());
             }
         });
     }

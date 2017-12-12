@@ -20,6 +20,13 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/detail_tanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorAccent"/>
+
     <RatingBar
         android:id="@+id/detail_rating_bar"
         style="@style/Widget.AppCompat.RatingBar.Small"
